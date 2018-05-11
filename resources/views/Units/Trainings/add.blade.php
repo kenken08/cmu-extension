@@ -1,0 +1,163 @@
+@extends('layouts.admin')
+
+@section('content')
+<div id="app"  class="row">
+        <div class="col-xs-12">
+            <div class="box box-primary box-solid">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                        <span><i class="fa fa-edit"></i></span>
+                    <span>Add Training for {{$project->project_name}}</span>
+                    </h3>
+                </div>
+
+                <div class="box-body no-padding">
+
+                    {!! Form::open(['action' => 'TrainingsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+                    {{Form::token()}}
+                        <fieldset>
+                            <div class="row">
+                                <div class="col col-6">
+                                    <div class="form-group {{ form_error_class('training_name', $errors) }}">
+                                        <label for="training_name">Training Name</label>
+                                        <div class="input-group">
+                                            <input type="text" name="training_name" class="form-control" placeholder="Training Name" value="{{ ($errors->any()? old('training_name') : '') }}">
+                                            <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                                        </div>
+                                        {!! form_error_message('training_name', $errors) !!}
+
+                                        <input class="hidden" type="text" name="proj_id" class="form-control" placeholder="Training Name" value="{{ $project->id }}">
+                                    
+                                    </div>
+                                </div>
+                              
+                                <div class="col col-6">
+                                    <div class="form-group {{ form_error_class('venue', $errors) }}">
+                                        <label for="venue">Venue</label>
+                                        <div class="input-group">
+                                            <input type="text" name="venue" class="form-control" placeholder="Venue" value="{{ ($errors->any()? old('venue') : '') }}">
+                                            <span class="input-group-addon"><i class="fa fa-location-arrow"></i></span>
+                                        </div>
+                                        {!! form_error_message('venue', $errors) !!}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group {{ form_error_class('date_conducted', $errors) }}">
+                                        <label for="fdate_conducted">From Date Conducted</label>
+                                        <div class="input-group">
+                                            <input id="fdate_conducted" type="text" class="form-control" name="fdate_conducted" placeholder="Select Date" value="{{ ($errors->any()? old('date_conducted') : '' )}}" required>
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                        {!! form_error_message('date_conducted', $errors) !!}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group {{ form_error_class('date_conducted', $errors) }}">
+                                        <label for="date_conducted">To Date Conducted</label>
+                                        <div class="input-group">
+                                            <input id="tdate_conducted" type="text" class="form-control" name="tdate_conducted" placeholder="Select Date" value="{{ ($errors->any()? old('date_conducted') : '' )}}" required>
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                        {!! form_error_message('date_conducted', $errors) !!}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group {{ form_error_class('days', $errors) }}">
+                                        <label for="participants_trained">No. of Days</label>
+                                        <input id="hrs" name="hrs" type="checkbox" onclick="document.getElementById('hrs').value = true">In Hrs</Input>
+                                        <div class="input-group">
+                                            <input id="noofdays" type="number" class="form-control" name="noofdays" placeholder="No. of Days" value="" required>
+                                            <span class="input-group-addon"><i class="fa fa-calendar-o"></i></span>
+                                        </div>
+                                        {!! form_error_message('days', $errors) !!}
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group {{ form_error_class('participants_trained', $errors) }}">
+                                        <label for="participants_trained">No. of Participants</label>
+                                        <div class="input-group">
+                                            <input id="noofparticipantstrained" type="number" class="form-control" name="noofparticipants" placeholder="No. of Participants" value="" required>
+                                            <span class="input-group-addon"><i class="fa fa-users"></i></span>
+                                        </div>
+                                        {!! form_error_message('date_conducted', $errors) !!}
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group {{ form_error_class('participants', $errors) }}">
+                                        <label for="participants">Participants Date Trained</label>
+                                        <div class="input-group">
+                                            <input id="participantsdt" type="text" class="form-control" name="pdt" placeholder="Participants Date Trained" value="" readonly>
+                                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                        </div>
+                                        {!! form_error_message('participants', $errors) !!}
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        @include('Admin.partials.form_footer')
+                    {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+@section('scripts')
+    @parent
+    <script type="text/javascript" charset="utf-8">
+        $(function ()
+        {
+            $("#fdate_conducted").datetimepicker({
+                viewMode: 'days',
+                format: 'YYYY-MM-DD'
+            });
+        })
+        $(function ()
+        {
+            $("#tdate_conducted").datetimepicker({
+                viewMode: 'days',
+                format: 'YYYY-MM-DD'
+            });
+        })
+    </script>
+    <script>
+    $(document).ready(function() {
+        //this calculates values automatically 
+        result();
+        $("#noofdays, #noofparticipantstrained").on("keydown keyup", function() {
+            result();
+        });
+
+        
+    });
+    function result(){
+        // var check = $('#hrs').prop('checked');
+        var isChecked = $('#hrs:checked').val()?true:false;
+        var num1 = document.getElementById('noofdays').value;
+        var num2 = document.getElementById('noofparticipantstrained').value;
+        
+       
+        if(isChecked == true){
+            var result = parseInt(num2) * .5;
+        }else{
+            if(num1 == 2 ){
+                var result = parseInt(num2) * 1.25;
+            }
+            else if(num1 == 3 || num1 == 4){
+                var result = parseInt(num2) * 1.5;
+            }
+            else if(num1 >= 5){
+                var result = parseInt(num2) * 2;
+            }
+            else if(num1 <= 1){
+                var result = parseInt(num2);
+            }
+        }
+        document.getElementById('participantsdt').value = result;
+    }
+    </script>
+@endsection

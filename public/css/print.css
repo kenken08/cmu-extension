@@ -1,0 +1,8 @@
+@media print {
+    #Banner p#Title {
+    font-size: 24pt;
+    }
+    #Banner p#Title a, #Banner p#Title a:link, #Banner p#Title a:visited {
+    color: #000; /* change link to black text */
+    }
+}
