@@ -91,3 +91,4 @@ Please see the [CHANGELOG](http://bpocallaghan.co.za/changelog) for more informa
 - [Alert](https://github.com/bpocallaghan/alert) A helper package to flash a bootstrap alert to the browser via a Facade or a helper function.
 - [Impersonate User](https://github.com/bpocallaghan/impersonate) This allows you to authenticate as any of your customers.
 - [Sluggable](https://github.com/bpocallaghan/sluggable) Provides a HasSlug trait that will generate a unique slug when saving your Laravel Eloquent model.
+# cmu-extension
