@@ -14,13 +14,14 @@
                     @lang('Register')
                 </a>
             @else
-                @if(auth()->user()->admin == '1')
-                   <a href="/home" class="btn btn-outline-primary"><i class="fa fa-user-secret"></i> Admin</a>
+                <a href="/home"><h5 style="font-family:Arial, Helvetica, sans-serif">Welcome, {{auth()->user()->firstname.' '.auth()->user()->lastname}}</h5></a>
+                {{-- @if(auth()->user()->admin == '1')
+                   <a href="/home" class="btn btn-outline-primary"><i class="fa fa-dashboard"></i> Dashboard</a>
                 @elseif(auth()->user()->admin == '2')
-                    <a href="/home" class="btn btn-outline-danger"><i class="fa fa-user-secret"></i> Units</a>
+                    <a href="/home" class="btn btn-outline-primary"><i class="fa fa-dashboard"></i> Dashboard</a>
                 @else
-                    <a href="/" class="btn btn-warning"><i class="fa fa-user-secret"></i>Guest</a>
-                @endif
+                    <a href="/account-profile" class="btn btn-warning"><i class="fa fa-user-secret"></i>Dashboard</a>
+                @endif --}}
             @endif
         </div>
     </div>

@@ -26,14 +26,25 @@
                         {{Form::textarea('body','', ['id'=>'article-ckeditor','name'=>'description','class'=>'form-control', 'placeholder'=>'Body Text'])}}
                     </div>
                 </div>
+                <br>
                 <div class="row">
                     <div class="col-md-6">
-                        <label for="file">Upload Photo</label>
-                        {{form::file('image', ['class'=>'btn btn-sm btn-outline-info'])}}
+                        {{-- <label for="file">Upload Photo</label>
+                        {{form::file('image', ['class'=>'btn btn-sm btn-outline-info'])}} --}}
+                        <section class="form-group {{ form_error_class('image', $errors) }}">
+                            <label>Upload Photo (250 x 250)</label>
+                            <div class="input-group input-group-sm">
+                                <input id="photo-label" type="text" class="form-control" readonly placeholder="Browse for an image">
+                                <span class="input-group-btn">
+                                <button type="button" class="btn btn-ebony-clay text-white" onclick="document.getElementById('image').click();">Browse</button>
+                            </span>
+                                <input id="image" style="display: none" accept="{{ get_file_extensions('image') }}" type="file" name="image" onchange="document.getElementById('photo-label').value = this.value">
+                            </div>
+                            {!! form_error_message('image', $errors) !!}
+                        </section>
                     </div>
                 </div>
             </div>
-    
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 {{Form::submit('Submit', ['class'=>'btn btn-success'])}}

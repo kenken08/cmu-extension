@@ -18,6 +18,13 @@
                         {{form::hidden('_method', 'PUT')}}
 
                         <fieldset>
+                            @if(user()->profile_image)
+                                <section class="text-center">
+                                    <img class="img img-circle" src="/storage/profile_images/{{auth()->user()->profile_image}}" name="profile_image" style="height:100px; width:100px;">
+                                    <input type="hidden" name="image" value="{{auth()->user()->profile_image }}">
+                                </section>
+                                <br>
+                            @endif
                             <div class="row">
                                 <div class="col col-6">
                                     <div class="form-group {{ form_error_class('firstname', $errors) }}">
@@ -53,18 +60,18 @@
                                     </section>
                                 </div>
 
-                                <div class="col col-6">
-                                    <div class="form-group {{ form_error_class('password', $errors) }}">
-                                        <label for="password">Password <small> (leave blank to keep it unchanged)</small></label>
+                                <div class="col-md-6">
+                                    <div class="form-group {{ form_error_class('contactno', $errors) }}">
+                                        <label>Contact Number</label>
                                         <div class="input-group">
-                                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" value="" >
-                                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                            <input type="number" class="form-control" id="contactno" name="contactno" placeholder="09xxxxxxxxx" value="{{ ($errors->any()? old('contactno') : user()->contactno) }}">
+                                            <span class="input-group-addon"><i class="fa fa-mobile"></i></span>
                                         </div>
-                                        {!! form_error_message('password', $errors) !!}
+                                        {!! form_error_message('contactno', $errors) !!}
                                     </div>
                                 </div>
                             </div>
-
+                            
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group {{ form_error_class('born_at', $errors) }}">
@@ -78,35 +85,19 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <div class="form-group {{ form_error_class('password_confirmation', $errors) }}">
-                                        <label>Confirm Password</label>
-                                        <div class="input-group">
-                                            <input type="password" class="form-control" id="id-password_confirmation" name="password_confirmation" placeholder="Password Confirm" value="{{ ($errors->any()? old('password_confirmation') : user()->password_confirmation) }}">
-                                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                    <section class="form-group {{ form_error_class('photo', $errors) }}">
+                                        <label>Profile image (250 x 250)</label>
+                                        <div class="input-group input-group-sm">
+                                            <input id="photo-label" type="text" class="form-control" readonly placeholder="Browse for an image">
+                                            <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" onclick="document.getElementById('profile_image').click();">Browse</button>
+                                        </span>
+                                            <input id="profile_image" style="display: none" accept="{{ get_file_extensions('image') }}" type="file" name="profile_image" onchange="document.getElementById('photo-label').value = this.value">
                                         </div>
-                                        {!! form_error_message('password_confirmation', $errors) !!}
-                                    </div>
+                                        {!! form_error_message('profile_image', $errors) !!}
+                                    </section>
                                 </div>
                             </div>
-
-                            <section class="form-group {{ form_error_class('photo', $errors) }}">
-                                <label>Profile image (250 x 250)</label>
-                                <div class="input-group input-group-sm">
-                                    <input id="photo-label" type="text" class="form-control" readonly placeholder="Browse for an image">
-                                    <span class="input-group-btn">
-                                  <button type="button" class="btn btn-default" onclick="document.getElementById('profile_image').click();">Browse</button>
-                                </span>
-                                    <input id="profile_image" style="display: none" accept="{{ get_file_extensions('image') }}" type="file" name="profile_image" onchange="document.getElementById('photo-label').value = this.value">
-                                </div>
-                                {!! form_error_message('profile_image', $errors) !!}
-                            </section>
-
-                            @if(user()->profile_image)
-                                <section>
-                                    <img src="/storage/profile_images/{{auth()->user()->profile_image}}" name="profile_image" style="max-height: 300px;">
-                                    <input type="hidden" name="image" value="{{auth()->user()->profile_image }}">
-                                </section>
-                            @endif
                         </fieldset>
 
                         @include('admin.partials.form_footer')

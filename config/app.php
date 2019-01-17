@@ -158,6 +158,8 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Bpocallaghan\Notify\NotifyServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Laracasts\Flash\FlashServiceProvider::class,
+        DevDojo\Chatter\ChatterServiceProvider::class,
 
         /*
          * Package Service Providers...

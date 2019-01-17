@@ -1,19 +1,11 @@
 {!!Form::open(['action' => ['ProjectsController@saveobj'], 'method'=>'POST'])!!}
 {{Form::token()}}
-<!-- The Modal -->
 <div class="modal fade" id="myModal" role="dialog" style="height:720px">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <!-- Modal Header -->
             <div class="modal-header bg-primary">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-                {{-- @if(isset($project->id)) --}}
-                    <h4 class="modal-title">Objectives</h4>
-                {{-- @endif --}}
-            {{-- <input name="project_id" for="project_id" class="hidden" value="{{$project->id}}"></input> --}}
             </div>
-    
-            <!-- Modal body -->
             <div class="modal-body">
                 <div class="well well-sm well-toolbar">
                     <table id="table" data-server="false" data-page-length="10" class=" table nowrap table-striped table-bordered" cellspacing="0" width="100%">
@@ -46,7 +38,7 @@
                                                     </div>
                                                 @endif
                                             </div>
-                                        </td> --}}
+                                        </td>
                                     </tr>
                                 @endif
                                 <tr>
@@ -58,8 +50,6 @@
                     </table> 
                 </div>  
             </div>
-
-            <!-- Modal footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 {{Form::submit('Save Changes', ['class'=>'btn btn-success'])}}

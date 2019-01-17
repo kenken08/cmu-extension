@@ -37,7 +37,7 @@ class ResourceEvaluationController extends Controller
             return view('evaluations.resource.index')->with(['title'=>$title, 'resources'=>$resources,'evals'=>$evals,'projects'=>$projects,'trainings'=>$trainings]);
         }
         else{
-            return view('errors.503');
+            return view('errors.Unauthorized');
         }
     }
 
@@ -59,31 +59,37 @@ class ResourceEvaluationController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request,[
+            'training_drop'=>'required',
+            'resource_drop'=>'required',
+            'topic'=>'required',
+        ]);
+        
         $title ="Resource Evaluation";
         $resources = DB::table('resources')->get();
         $evals = DB::table('evaluations')->get();
 
         $data = $request->except('_token');
 
-        if(count($data['indicator_id'])){
-            $indicator_eval = count($data['indicator_eval']);
-            $indicator_id = count($data['indicator_id']);
+        $indicator_eval = count($data['indicator_eval']);
+        $indicator_id = count($data['indicator_id']);
+        if($indicator_eval < 8){
+            flash()->error('Oops, Please Evaluate every item');
+            return redirect()->back();
+        }else{
             for($i=0;$i<$indicator_eval;$i++){
                 $resource = new ResourceEvaluation;
                 // $resource->user_id = auth()->user()->id;
-                $resource->proj_id = $data['proj_id'];
-                $resource->training_id = $data['training_id']; 
+                $resource->proj_id = $data['project'];
+                $resource->training_id = $data['training_drop']; 
+                $resource->rt_id = $data['resource_drop'];
                 $resource->comment = $data['comment']; 
                 $resource->indicator_id = $data['indicator_id'][$i];
                 $resource->indicator_eval = $data['indicator_eval'][$i];
                 $resource->save();
             }
-            notify()->success('Success', 'Evaluated Successfully');
-            return redirect('/home');
-        }
-        else{
-            notify()->error('Oops', 'One check per row only');
-            return redirect('/training/evaluation');
+            flash()->success('Success, Evaluated Successfully');
+            return redirect()->back();
         }
     }
 

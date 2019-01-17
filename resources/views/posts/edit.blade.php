@@ -9,9 +9,9 @@
             </div>
             <div class="card card-body">
                 <div class="form-inline">
-                    {{form::hidden('_method', 'PUT')}}                    
-                    {{form::submit('Save Changes', ['class'=>'btn btn-info'])}} &nbsp;
-                    {{form::file('cover_image', ['class'=>'btn btn-sm btn-outline-info'])}}
+                    {{Form::hidden('_method', 'PUT')}}                    
+                    {{Form::submit('Save Changes', ['class'=>'btn btn-info'])}} &nbsp;
+                    {{Form::file('cover_image', ['class'=>'btn btn-sm btn-outline-info'])}}
                 </div>          
             <div class="form-group">
                 {{Form::label('title', 'Title')}}

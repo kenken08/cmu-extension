@@ -2,11 +2,16 @@
 
 @section('content')
 <div class="row">
+    <div class="col-sm-12 text-right">
+    <i class="fa fw fa-home"><span>Dashboard</span> / <span>Projects</span> / <span>Trainings</span> / <span>Participants</span> / <span>{{$title}}</span></i>
+    </div><hr>
+</div>
+<div class="row">
     <div class="col-xs-12">
-        <div class="box box-success">
+        <div class="box box-primary box-solid">
             <div class="box-header with-border">
                 <h3 class="box-title">
-                    <span><i class="fa fa-plus"></i> Add Attendee</span>
+                    <span><i class="fa fa-plus"></i> Add Participant</span>
                 </h3>
             </div>
 
@@ -77,9 +82,9 @@
                                     <label for="civilstatus">Civil Status</label>
                                     <div class="well-sm-3">
                                         <select class="form-control selectpicker"  role="combobox" id="civilstatus" name="civilstatus" value="{{ old('civilstatus') }}" title="Choose Status">
-                                            <option value=1>Single</option>
-                                            <option value=2>Married</option>
-                                            <option value=3>Widow</option>
+                                            <option value="Single">Single</option>
+                                            <option value="Married">Married</option>
+                                            <option value="Widow">Widow</option>
                                         </select>
                                     </div>
                                     {!! form_error_message('civilstatus', $errors) !!}
@@ -92,8 +97,8 @@
                                     <label for="email">Sex</label>
                                     <div class="well-sm-3">
                                         <select class="form-control selectpicker" role="combobox" id="sex" name="sex" placeholder="Select Sex" value="{{ old('sex') }}">
-                                            <option value=1>Male</option>
-                                            <option value=2>Female</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
                                         </select>
                                     </div>
                                     {!! form_error_message('sex', $errors) !!}
@@ -104,20 +109,20 @@
                                     <label for="ethnic">Ethnic Origin</label>
                                     <div class="well-sm-3">
                                         <select class="form-control selectpicker" role="combobox" id="ethnicorigin" name="ethnicorigin" title="Select Ethnic Origin" data-show-subtext="true" data-live-search="true" value="{{ old('ethnicorigin') }}">
-                                            <option value=1>Cebuano</option>
-                                            <option value=2>Subanen</option>
-                                            <option value=3>B’laan</option>
-                                            <option value=4>Mandaya</option>
-                                            <option value=5>Higaonon</option>
-                                            <option value=6>Talaandig</option>
-                                            <option value=7>Manobo</option>
-                                            <option value=8>T’boli</option>
-                                            <option value=9>Tiruray</option>
-                                            <option value=10>Bagobo</option>
-                                            <option value=11>Tagakaolo</option>
-                                            <option value=12>Dibabawon</option>
-                                            <option value=13>Manguangan</option>
-                                            <option value=14>Mansaka</option>
+                                            <option value="Cebuano">Cebuano</option>
+                                            <option value="Subanen">Subanen</option>
+                                            <option value="B’laan">B’laan</option>
+                                            <option value="Mandaya">Mandaya</option>
+                                            <option value="Higaonon">Higaonon</option>
+                                            <option value="Talaandig">Talaandig</option>
+                                            <option value="Manobo">Manobo</option>
+                                            <option value="T’boli">T’boli</option>
+                                            <option value="Tiruray">Tiruray</option>
+                                            <option value="Bagobo">Bagobo</option>
+                                            <option value="Tagakaolo">Tagakaolo</option>
+                                            <option value="Dibabawon">Dibabawon</option>
+                                            <option value="Manguangan">Manguangan</option>
+                                            <option value="Mansaka">Mansaka</option>
                                         </select>
                                     </div>
                                     {!! form_error_message('ethnicorigin', $errors) !!}
@@ -128,16 +133,16 @@
                                     <label for="ethnic">Religion</label>
                                     <div class="well-sm-3">
                                         <select class="form-control selectpicker" role="combobox" id="religion" name="religion" placeholder="Select Religion" data-show-subtext="true" data-live-search="true" value="{{ old('religion') }}">
-                                            <option value=1>SDA</option>
-                                            <option value=2>Roman Catholic</option>
-                                            <option value=3>Baptist</option>
-                                            <option value=4>Penticostal</option>
-                                            <option value=5>UCP</option>
-                                            <option value=6>Born Again</option>
-                                            <option value=7>INC</option>
-                                            <option value=8>Iglesia ni Cristo</option>
-                                            <option value=9>Filipinista</option>
-                                            <option value=10>Saksi ni Jehovah</option>
+                                            <option value="SDA">SDA</option>
+                                            <option value="Roman Catholic">Roman Catholic</option>
+                                            <option value="Baptist">Baptist</option>
+                                            <option value="Penticostal">Penticostal</option>
+                                            <option value="UCP">UCP</option>
+                                            <option value="Born Again">Born Again</option>
+                                            <option value="INC">INC</option>
+                                            <option value="Iglesia sa Dios">Iglesia sa Dios</option>
+                                            <option value="Filipinista">Filipinista</option>
+                                            <option value="Saksi ni Jehovah">Saksi ni Jehovah</option>
                                         </select>
                                     </div>
                                     {!! form_error_message('religion', $errors) !!}
@@ -148,12 +153,12 @@
                                     <label for="hea">Highest Educational Attainment</label>
                                     <div class="well-sm-3">
                                         <select class="form-control selectpicker" role="combobox" id="hea" name="hea" placeholder="Select Highest Educational Attainment" data-show-subtext="true" data-live-search="true" value="{{ old('hea') }}">
-                                            <option value=1>Elementary</option>
-                                            <option value=2>High School</option>
-                                            <option value=3>College</option>
-                                            <option value=4>NCII</option>
-                                            <option value=5>NCIII</option>
-                                            <option value=6>Vocational</option>
+                                            <option value="Elementary">Elementary</option>
+                                            <option value="High School">High School</option>
+                                            <option value="College">College</option>
+                                            <option value="NCII">NCII</option>
+                                            <option value="NCIII">NCIII</option>
+                                            <option value="Vocational">Vocational</option>
                                         </select>
                                     </div>
                                     {!! form_error_message('hea', $errors) !!}

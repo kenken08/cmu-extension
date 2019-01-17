@@ -15,14 +15,14 @@
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
 
-                <li class="dropdown messages-menu">
+                <li class="hidden dropdown messages-menu">
                     <a id="js-notifications" href="#" class="dropdown-toggle" data-toggle="modal" data-target="#modal-notifications">
                         <i class="fa fa-envelope-o"></i>
                         <span data-user= {{Auth::user()->id}} id="js-notifications-badge" class="label label-success" style="display: none;"></span>
                     </a>
                 </li>
 
-                <li class="dropdown messages-menu">
+                <li class="hidden dropdown messages-menu">
                     <a data-type="activities" href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-bell-o"></i>
                         <span id="js-activities-badge" class="label label-warning" style="display: none;"></span>
@@ -33,7 +33,7 @@
 
                             </ul>
                         </li>
-                        <li class="footer"><a href="/admin/history/website">See All Activities</a>
+                        <li class="footer"><a href="">See All Activities</a>
                         </li>
                     </ul>
                 </li>

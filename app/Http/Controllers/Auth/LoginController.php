@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
+
 use Auth;
 use App\User;
+use App\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Middleware\AuthenticateAdmin;
@@ -37,6 +39,9 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        // $user = new Role;
+        // if(Auth::check() !== 'pending'){
+            $this->middleware('guest')->except('logout');
+        // }
     }
 }

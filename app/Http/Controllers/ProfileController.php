@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Notifications\Notification;
 use App\User;
+use Auth;
 use DB;
 
 class ProfileController extends Controller
@@ -118,9 +119,15 @@ class ProfileController extends Controller
                 }
                 else{notify()->success('Success', 'Profile updated sucessfully no File Uploaded');}
                 $user->born_at = $request->input('born_at');
+                $user->contactno = $request->input('contactno');
                 $user->save();
                 
-                return redirect('/home')->with('title', $title);
+                if(Auth::user()->admin == 0){
+                    return redirect('/account-profile');
+                }
+                else{
+                    return redirect('/home');
+                }
             }
             else{
 
@@ -132,9 +139,16 @@ class ProfileController extends Controller
                 }
                 $user->profile_image = $fileNameToStore;
                 $user->born_at = $request->input('born_at');
+                $user->contactno = $request->input('contactno');
                 $user->save();
                 notify()->success('Success', 'Profile updated sucessfully');
-                return redirect('/home')->with('title', $title);
+                
+                if(Auth::user()->admin == 0){
+                    return redirect('/account-profile');
+                }
+                else{
+                    return redirect('/home');
+                }
             }
     }
 

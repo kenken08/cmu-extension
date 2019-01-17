@@ -184,7 +184,7 @@ table {
   border-collapse: collapse;
 }
 td,
-th {
+th {  
   padding: 0;
 }
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
@@ -1142,6 +1142,8 @@ img {
 }
 .img-circle {
   border-radius: 50%;
+  box-shadow: 0px 0px 0px 4px rgba(200, 200, 200, 2);
+  
 }
 hr {
   margin-top: 20px;
@@ -1403,6 +1405,11 @@ a.bg-warning:focus {
 .bg-danger {
   background-color: #f2dede;
 }
+
+.bg-ebonyclay {
+  background-color: rgb(34, 49, 63);
+}
+
 a.bg-danger:hover,
 a.bg-danger:focus {
   background-color: #e4b9b9;
@@ -2867,6 +2874,13 @@ select[multiple].input-lg {
   background-color: #fcf8e3;
   border-color: #8a6d3b;
 }
+
+.has-custom .input-group-addon {
+  color: rgb(34, 49, 63);
+  background-color: rgb(34, 49, 63);
+  border-color: rgb(34, 49, 63);
+}
+
 .has-warning .form-control-feedback {
   color: #8a6d3b;
 }
@@ -3906,6 +3920,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+
 .input-group-addon.input-sm {
   padding: 5px 10px;
   font-size: 12px;
@@ -5128,6 +5143,7 @@ a.thumbnail.active {
   margin-bottom: 20px;
   overflow: hidden;
   background-color: #f5f5f5;
+  border: 1px solid rgb(0, 131, 88);
   border-radius: 4px;
   -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
           box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
@@ -5138,7 +5154,7 @@ a.thumbnail.active {
   height: 100%;
   font-size: 12px;
   line-height: 20px;
-  color: #fff;
+  color: rgb(0, 0, 0);
   text-align: center;
   background-color: #337ab7;
   -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
@@ -5877,6 +5893,7 @@ button.close {
   overflow: hidden;
   -webkit-overflow-scrolling: touch;
   outline: 0;
+
 }
 .modal.fade .modal-dialog {
   -webkit-transition: -webkit-transform .3s ease-out;
@@ -13710,6 +13727,7 @@ a:focus {
 .user-panel {
   position: relative;
   width: 100%;
+  height: 200px;
   padding: 10px;
   overflow: hidden;
 }
@@ -13731,8 +13749,8 @@ a:focus {
 }
 .user-panel > .image > img {
   width: 100%;
-  max-width: 45px;
-  height: auto;
+  max-width: 100px;
+  height: 100px;
 }
 .user-panel > .info {
   padding: 5px 5px 5px 15px;
@@ -14877,6 +14895,11 @@ a:focus {
 .box.box-success {
   border-top-color: #00a65a;
 }
+
+.box.box-success1 {
+  border-top-color: #049372;
+}
+
 .box.box-default {
   border-top-color: #d2d6de;
 }
@@ -15604,6 +15627,10 @@ a:focus {
 }
 .btn-primary {
   background-color: #3c8dbc;
+  border-color: #367fa9;
+}
+.btn-ebony-clay {
+  background-color: rgb(34, 49, 63);
   border-color: #367fa9;
 }
 .btn-primary:hover,
@@ -18558,6 +18585,9 @@ table.text-center th {
 .text-maroon {
   color: #d81b60 !important;
 }
+.text-white {
+  color: #ffffff !important;
+}
 .link-muted {
   color: #7a869d;
 }
@@ -18613,6 +18643,14 @@ table.text-center th {
 }
 .text-sm {
   font-size: 12px;
+}
+.text-lg {
+  font-size: 16px;
+}
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .jqstooltip {
   padding: 5px !important;
@@ -20124,4 +20162,160 @@ div.dataTables_filter.input-group input {
 }
 .bootstrap-tagsinput .tag [data-role="remove"]:hover:active {
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+
+.box-icon3 {
+  background-color: transparent;
+  /* border: 1px solid #e731ff; */
+  border-right: 2px solid orange;
+  border-radius: 50%;
+  display: table;
+  height: 60px;
+  /* margin: 0 auto;
+  width: 80px; */
+  margin-top: -61px;
+}
+
+.card {
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+  height: 30px;
+  width: 150px;
+  background-color: orange;
+}
+
+.card2 {
+  box-shadow: -1px 15px 28px 0px ;
+  border-bottom:5px solid #049372!important;
+  /* max-width: 300px; */
+  height: 300px;
+  margin: auto;
+  border-radius: 6px;
+  background-color: #fff;
+  text-align: center;
+  font-family: arial;
+}
+
+.c-css-toggle__button {
+  width: 60px;
+  height: 40px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+  overflow: hidden;
+  border: 1px solid #018264;
+}
+.c-css-toggle input[type=radio] {
+ display: none;
+}
+
+.c-css-toggle__button__knob, .c-css-toggle__button__knob__off, .c-css-toggle__button__knob__on {
+  box-sizing: border-box;
+}
+.c-css-toggle__button__knob {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 102px;
+  height: 40px;
+  font-weight: 700;
+  transition: all 200ms linear;
+}
+
+.c-css-toggle__button__knob__off, .c-css-toggle__button__knob__on {
+  width: 42px;
+  line-height: 20px;
+  padding: 10px;
+  color: #452c52;
+}
+
+.c-css-toggle__button__knob__pommel {
+  border: 1px solid #018264;
+  width: 18px;
+  margin-top: -1px;
+  margin-bottom: -1px;
+  background-color: #f47920;
+  
+}
+.c-css-toggle__button__knob__on {
+  background-color: #018264;
+  color: #fff;
+}
+.c-css-toggle__button__knob__off, .c-css-toggle__button__knob__on {
+  width: 42px;
+  line-height: 20px;
+  padding: 10px;
+}
+
+.c-css-toggle input[type=radio]:checked+.c-css-toggle__button .c-css-toggle__button__knob {
+  -webkit-transform: translateX(-42px);
+  -ms-transform: translateX(-42px);
+  transform: translateX(-42px);
+}
+#search{
+  background:#2980b9;
+  color:white;
+}
+#search:hover{
+  background:#34495e;
+}
+td{
+  vertical-align: middle !important;
+}
+
+/* Toggle Switch */
+.switchBtn {
+  position: relative;
+  display: inline-block;
+  width: 90px;
+  height: 34px;
+}
+.switchBtn input {display:none;}
+.slide {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  padding: 8px;
+  color: #fff;
+}
+.slide:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 60px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+input:checked + .slide {
+  background-color: #8CE196;
+  padding-left: 40px;
+}
+input:focus + .slide {
+  box-shadow: 0 0 1px #01aeed;
+}
+input:checked + .slide:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+  left: -20px;
+}
+
+/* rounded toggle switch */
+.slide.round {
+  border-radius: 34px;
+}
+.slide.round:before {
+  border-radius: 50%;
 }

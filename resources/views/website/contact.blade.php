@@ -1,66 +1,65 @@
 @extends('layouts.website')
 
 @section('content')
-<br>
-    <section class="content bg-default padding padding-top padding-bottom">
+<div class="body">
+    <ol class="breadcrumb col-md-12">
         <div class="container">
-            <div class="body">
-                <ol class="breadcrumb bg-light col-md-12">
-                    <li class="breadcrumb-item">
-                        <a class="text-secondary" href="/">Home</a>
-                        <span class="text-muted">/ {!! $title !!}</span>
-                    </li>
-                </ol>
-            </div>  
+            <li class="breadcrumb-item">
+                <a class="text-secondary" href="/">Home</a>
+                <span class="text-muted">/ {!! $title !!}</span>
+            </li>
         </div>
+    </ol>
+</div>
+    {{-- <section class="content bg-default padding padding-top padding-bottom">  
         <div class="container">
             <div class="row">
                 <div class="body col-sm-7 col-lg-8">
                     @include('website.partials.page_header')
                     <h2>Send us a Message</h2>
-                    <form id="form-contact-us" accept-charset="UTF-8" action="{{ Request::url().'/submit' }}" method="POST">
+                        {!! Form::open(['action' => 'MessageController@send', 'method' => 'POST'])!!}
                         {!! csrf_field() !!}
+                        @if(!\Auth::check())
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label>First Name</label>
+                                        <input type="text" class="form-control" name="firstname" placeholder="Enter Name">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Last Name</label>
+                                        <input type="text" class="form-control" name="lastname" placeholder="Enter Last Name">
+                                    </div>
+                                </div>
+                            </div>
 
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <label>First Name</label>
-                                    <input type="text" class="form-control" name="firstname" placeholder="Enter Name">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input type="text" name="email" class="form-control" placeholder="Enter Email">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Phone</label>
+                                        <input type="text" name="phone" class="form-control" placeholder="Enter Phone number">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <label>Last Name</label>
-                                    <input type="text" class="form-control" name="lastname" placeholder="Enter Last Name">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input type="text" name="email" class="form-control" placeholder="Enter Email">
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <label>Phone</label>
-                                    <input type="text" name="phone" class="form-control" placeholder="Enter Phone number">
-                                </div>
-                            </div>
-                        </div>
+                        @endif
 
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="form-group">
+                                <div class="form-group {{ form_error_class('message', $errors) }}">
                                     <label>Message</label>
-                                    <textarea rows="5" name="content" class="form-control" placeholder="Write your message" style="height:200px;"></textarea>
+                                    <textarea rows="5" name="message" class="form-control" placeholder="Write your message" style="height:200px;" required></textarea>
+                                    {!! form_error_message('message', $errors) !!}
                                 </div>
                             </div>
                         </div>
-
-                        <!--@include('website.partials.form.captcha')-->
 
                         @include('website.partials.form.feedback')
 
@@ -71,7 +70,7 @@
                                 </button>
                             </div>
                         </div>
-                    </form>
+                    {!! Form::close() !!}
                 </div>
 
                 <div class="side hidden-xs col-sm-5 col-lg-4">
@@ -89,6 +88,93 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section> --}}
+    <!--==========================
+      Contact Section
+    ============================-->
+    <section id="contact1">
+        <div class="container wow fadeInUp">
+            <div class="section-header">
+            <h3 class="section-title">Contact</h3>
+            <p class="section-description">Send us a Message</p>
+            </div>
+        </div>
+    
+        <!-- <div id="google-map" data-latitude="40.713732" data-longitude="-74.0092704"></div> -->
+    
+        <div class="container wow fadeInUp">
+            <div class="row justify-content-center">
+    
+            <div class="col-lg-3 col-md-4">
+    
+                <div class="info">
+                <div>
+                    <i class="fa fa-map-marker"></i>
+                    <p>P-12, College Park, Musuan<br>Philippines, Region 10</p>
+                </div>
+    
+                <div>
+                    <i class="fa fa-envelope"></i>
+                    <p>info@extensionoffice.com</p>
+                </div>
+    
+                <div>
+                    <i class="fa fa-phone"></i>
+                    <p>+639067578290</p>
+                </div>
+                </div>
+    
+                <div class="social-links">
+                <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
+                <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+                <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+                </div>
+    
+            </div>
+    
+            <div class="col-lg-5 col-md-8">
+                <div class="form">
+                {{-- <div id="sendmessage">Your message has been sent. Thank you!</div> --}}
+                <div id="errormessage"></div>
+                {!! Form::open(['action' => 'MessageController@send', 'method' => 'POST'])!!}
+                {!! csrf_field() !!}
+                @if(Auth::check())
+                    <div class="form-group">
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" value="{{user()->firstname.' '.user()->lastname}}" readonly/>
+                    <div class="validation"></div>
+                    </div>
+                    <div class="form-group">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" value="{{user()->email}}" readonly/>
+                    <div class="validation"></div>
+                    </div>
+                @else
+                    <div class="form-group">
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" value="" />
+                    <div class="validation"></div>
+                    </div>
+                    <div class="form-group">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" value=""/>
+                    <div class="validation"></div>
+                    </div>
+                @endif
+
+                    <div class="form-group">
+                    <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                    <div class="validation"></div>
+                    </div>
+                
+                    <div class="form-group">
+                    <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+                    <div class="validation"></div>
+                    </div>
+                    <div class="text-center"><button type="submit">Send Message</button></div>
+                {!! Form::close() !!}
+                </div>
+            </div>
             </div>
         </div>
     </section>

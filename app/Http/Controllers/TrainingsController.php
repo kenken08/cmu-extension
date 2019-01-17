@@ -7,6 +7,7 @@ use App\Projects;
 use App\Trainings;
 use App\Attendees;
 use App\ptdetails;
+use App\topicsandresource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
@@ -70,31 +71,56 @@ class TrainingsController extends Controller
             'noofdays' => 'required',
             'noofparticipants' => 'required',
             'pdt' => 'required',
+            'training_image'=>'nullable|image|nullable'
         ]);
 
-        $title = 'Add Trainings';
-        $trainings = new Trainings;
-        $trainings->training_name = $request->input('training_name');
-        $trainings->venue = $request->input('venue');
-        $trainings->fdate_conducted = $request->input('fdate_conducted');
-        $trainings->tdate_conducted = $request->input('tdate_conducted');
-        $trainings->noofdays = $request->input('noofdays');
-        $trainings->noofparticipants = $request->input('noofparticipants');
-        $trainings->pdt = $request->input('pdt');
-        $trainings->user_id = auth()->user()->id;
-        $trainings->proj_id = $request->input('proj_id');
-        $trainings->save();
+        if(date('Y-m-d', strtotime($request->input('tdate_conducted'))) < date('Y-m-d', strtotime($request->input('fdate_conducted')))){
+            notify()->error('Oops!','To Date Conducted is greater than From Date Conducted');
+            return redirect('/home/projects/'.$request->input('proj_id').'/trainings');
+        }else{
+            if($request->hasFile('training_image')){            
+                $filenameWithExt = $request->file('training_image')->getClientOriginalName();
+                $filename =pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                $extension = $request->file('training_image')->getClientOriginalExtension();
+                $fileNameToStore = $filename .'_'.time().'.'.$extension;
+                $path = $request->file('training_image')->storeAs('public/training_image', $fileNameToStore);
+            }
+            else{
+                $fileNameToStore = 'banner-1.jpg';
+            }
 
-        $trainid = Trainings::orderBy('created_at', "DESC")->take(1)->value('id');
+            $trainings = new Trainings;
+            $trainings->training_name = $request->input('training_name');
+            $trainings->venue = $request->input('venue');
+            $trainings->fdate_conducted = $request->input('fdate_conducted');
+            $trainings->tdate_conducted = $request->input('tdate_conducted');
+            $trainings->noofdays = $request->input('noofdays');
+            $trainings->noofparticipants = $request->input('noofparticipants');
+            $trainings->pdt = $request->input('pdt');
+            $trainings->user_id = auth()->user()->id;
+            $trainings->proj_id = $request->input('proj_id');
+            $trainings->training_image = $fileNameToStore;
+            $trainings->description = $request->input('description');
+            $trainings->save();
+
+            $trainid = Trainings::orderBy('created_at', "DESC")->take(1)->value('id');
+            
+            $training = new ptdetails;
+            $training->user_id = auth()->user()->id;
+            $training->training_id = $trainid;
+            $training->proj_id = $request->input('proj_id');
+            $training->save();
+            
+            notify()->success('Success',' Training successfully added');
+            return redirect('/home/projects/'.$request->input('proj_id').'/trainings');
+        }
         
-        $training = new ptdetails;
-        $training->user_id = auth()->user()->id;
-        $training->training_id = $trainid;
-        $training->proj_id = $request->input('proj_id');
-        $training->save();
+        // $fd = new \DateTime($request->input('fdate_conducted'));
+        // $td = new \DateTime($request->input('tdate_conducted'));
 
-        return redirect('/home/projects/'.$request->input('proj_id').'/trainings');
-        notify()->success('Success',' Training successfully added');
+        // $c = ($fd>$td);
+
+        // var_dump($c);
     }
 
     /**
@@ -116,7 +142,8 @@ class TrainingsController extends Controller
      */
     public function edit($id)
     {
-    
+        $title = "Edit Training";
+        return view('Units.Trainings.edit',compact('title'));
     }
 
     /**
@@ -128,7 +155,59 @@ class TrainingsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'training_name' => 'required',
+            'venue' => 'required',
+            'fdate_conducted' => 'required|date',
+            'tdate_conducted' => 'required|date',
+            'noofdays' => 'required',
+            'noofparticipants' => 'required',
+            'pdt' => 'required',
+            'description'=>'required',
+        ]);
+
+        $title = 'Add Trainings';
+        $trainings = Trainings::find($id);
+
+        if($request->hasFile('training_image')){
+            
+            if($trainings->training_image !== 'banner-1.jpg'){
+                Storage::delete('public/training_image/'.$trainings->training_image);
+            }
+            
+            $filenameWithExt = $request->file('training_image')->getClientOriginalName();
+            $filename =pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('training_image')->getClientOriginalExtension();
+            $fileNameToStore = $filename .'_'.time().'.'.$extension;
+            $path = $request->file('training_image')->storeAs('public/training_image', $fileNameToStore);
+        }
+        else{
+            $fileNameToStore = $trainings->training_image;
+        }
+
+        $trainings->training_name = $request->input('training_name');
+        $trainings->venue = $request->input('venue');
+        $trainings->fdate_conducted = $request->input('fdate_conducted');
+        $trainings->tdate_conducted = $request->input('tdate_conducted');
+        $trainings->noofdays = $request->input('noofdays');
+        $trainings->noofparticipants = $request->input('noofparticipants');
+        $trainings->pdt = $request->input('pdt');
+        $trainings->user_id = auth()->user()->id;
+        $trainings->proj_id = $request->input('proj_id');
+        $trainings->training_image = $fileNameToStore;
+        $trainings->description = $request->input('description');
+        $trainings->save();
+
+        // $trainid = Trainings::orderBy('created_at', "DESC")->take(1)->value('id');
+        
+        // $training = new ptdetails;
+        // $training->user_id = auth()->user()->id;
+        // $training->training_id = $trainid;
+        // $training->proj_id = $request->input('proj_id');
+        // $training->save();
+
+        notify()->success('Success',' Training successfully updated');
+        return redirect()->back();
     }
 
     /**
@@ -140,5 +219,21 @@ class TrainingsController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function addTopics(Request $request,$id){
+        $this->validate($request,[
+            'resource_name' => 'required',
+            'topic' => 'required',
+        ]);
+        
+        $resource = new topicsandresource;
+        $resource->train_id = $id;
+        $resource->resource_name = $request->input('resource_name');
+        $resource->evaluated = 0;
+        $resource->topic = $request->input('topic');
+        $resource->save();
+
+        notify()->success('Success','Resource Person and Topic added successfully');
+        return redirect()->back();
     }
 }

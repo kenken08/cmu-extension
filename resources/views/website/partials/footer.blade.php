@@ -7,7 +7,7 @@
                 </a>
                 <hr>
                 <small>
-                    Website by <a href="https://github.com/bpocallaghan" target="_blank">{!! env('APP_AUTHOR') !!}</a>
+                    Website by {!! env('APP_AUTHOR') !!}
                 </small>
             </div>
             <div class="col-sm-8 text-center">
@@ -29,13 +29,11 @@
         </div>
     </div>
     <div class="container-fluid p-3 bg-custom">
-        {{--<p class="text-right float-right text-muted small">
+        {{-- <p class="text-right float-right text-muted small">
             Copyright &copy; {{config('app.name') . ' ' . date('Y')}}
-        </p>--}}
+        </p> --}}
         <div class="text-md-center">
-            <a class="text-muted small text-white" href="/privacy-policy">Privacy Policy</a> |
-            <a class="text-muted small text-white" href="/terms-and-conditions">Terms and Conditions </a> |
-            <a class="text-muted small text-white" href="/faq">FAQs</a>
+            <a>Copyright &copy; {{config('app.name') . ' ' . date('Y')}}</a>
         </div>
     </div>
 </footer>

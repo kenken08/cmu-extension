@@ -1,38 +1,42 @@
 @extends('layouts.admin')
 @section('content')
 <div class="row">
+    <div class="col-sm-12 text-right">
+        <i class="fa fw fa-home"><span>Dashboard</span> / <span>Evaluation Forms</span> / <span>{{$title}}</span></i>
+    </div><hr>
+</div>
+<div class="row">
     <div class="col-xs-12">
-        <div class="box box-success">
+        <div class="box box-primary box-solid">
             <div class="box-header with-border">
                 <h3 class="box-title">
                     <i class="fa fa-edit"><span>&nbsp;Resource Person Evaluation</span></i>
                 </h3>
             </div>
             <div class="box-body no-padding">
-                {!! Form::open(['action' => 'ResourceEvaluationController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+                @include('flash::message')
+                {!! Form::open(['action' => 'ResourceEvaluationController@store', 'method' => 'POST']) !!}
                 {!! csrf_field() !!}
                 <fieldset>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="resource">Project</label>
-                                <select id="proj_id" name="proj_id" class="selectpicker form-control" data-show-subtext="true" data-live-search="true">
+                                <label for="project">Project</label>
+                                <select id="project" name="project" class="selectpicker form-control" data-show-subtext="true" data-live-search="true">
+                                    <option value="0">Select Project...</option>
                                     @foreach($projects as $proj)
-                                        <option name="proj_id" value={{$proj->id}}>{{$proj->project_name}}</option>
+                                        <option class="text-black" value={{ $proj->id }}>{{ $proj->project_name }}</option>
                                     @endforeach
                                 </select>
-                                {!! form_error_message('proj_id', $errors) !!}
+                                {{-- {!! Form::select("project",\App\Projects::pluck('project_name','id'),null,["class"=>"form-control","id"=>"project",'title'=>'Select Project']) !!} --}}
+                                {!! form_error_message('project', $errors) !!}
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="resource">Training</label>
-                                <select id="training_id" name="training_id" class="selectpicker form-control" data-show-subtext="true" data-live-search="true">
-                                    @foreach($trainings as $training)
-                                        <option name="training_id" value={{$training->id}}>{{$training->training_name}}</option>
-                                    @endforeach
-                                </select>
-                                {!! form_error_message('training_id', $errors) !!}
+                                <label for="training">Training</label>
+                                {!! Form::select("training_id",[],null,["class"=>"form-control", "id"=>"training_drop",'name'=>'training_drop']) !!}
+                                {!! form_error_message('training_drop', $errors) !!}
                             </div>
                         </div>
                     </div>
@@ -40,25 +44,15 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="resource">Name of Resource Person</label>
-                                <div class="input-group">
-                                    <input type="text" name="resource" list="person" class="selectpicker form-control" placeholder="Name" value="{{ old('resource') }}">
-                                    <datalist class="selectpicker" id="person">
-                                        <option>Rae</option>
-                                        <option>Law</option>
-                                        <option>Me</option>
-                                        <option>God</option>
-                                    </datalist>
-                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                </div>
-                                {!! form_error_message('resource', $errors) !!}
+                                {!! Form::select("resource_id",[],null,["class"=>"form-control", "id"=>"resource_drop",'name'=>'resource_drop']) !!}
+                                {!! form_error_message('resource_drop', $errors) !!}
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="resource">Topic</label>
-                                <div class="input-group">
+                                <div id="topic">
                                     <input type="text" name="topic" class="form-control" placeholder="Topic" value="{{ old('topic') }}">
-                                    <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
                                 </div>
                                 {!! form_error_message('topic', $errors) !!}
                             </div>
@@ -91,12 +85,20 @@
                             @foreach($resources as $resource)
                                 <tr>
                                     <td class="hidden"><input type="text" name="indicator_id[]" value="{{$resource->id}}"></td>
-                                    <td>{{$resource->indicator}}</td>
+                                    <td class="text-uppercase" style="vertical-align:middle;"><h5>{{$resource->indicator}}</h5></td>
                                     @php($i=1)
                                     @foreach($evals as $eval)
-                                        <td class="text-center">
-                                            <input type="checkbox" name="indicator_eval[]" value="{{$eval->id}}">
-                                            <span>{{$eval->name}}</span>&nbsp;&nbsp;&nbsp;
+                                        <td class="text-center" style="vertical-align:middle;">
+                                            <label class="c-css-toggle toggle-button">
+                                                <input type="radio" name="indicator_eval[]{{$j}}" value="{{$eval->id}}">
+                                                <div class="c-css-toggle__button">
+                                                    <div class="c-css-toggle__button__knob">
+                                                    <div class="c-css-toggle__button__knob__off">&times;</div> 
+                                                    <div class="c-css-toggle__button__knob__pommel"></div> 
+                                                    <div class="c-css-toggle__button__knob__on" data-toggle="tooltip" title="{{$eval->name}}"><h6 class="text-truncate" style="margin-top:1px;margin-left:-11px">{{$eval->name}}</h6></div>
+                                                    </div>
+                                                </div>
+                                            </label> 
                                         </td>
                                     <td class="hidden">{{$i}}</td>
                                     @php($i++)
@@ -121,4 +123,46 @@
         </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+<script>
+    $('#project').on('change', function () {
+        getTrainings($(this).val());
+    });
+    function getTrainings(id) {
+        $.get("{{url('/gettrainings')}}/" + id, function (data) {
+            $("#training_drop").html(data);
+        });
+    }
+    $(document).ready(function () {
+        getTrainings($('#project').val());
+    });
+    
+    $('#training_drop').on('change focus', function () {
+        getResource($(this).val());
+    });
+    function getResource(id) {
+        $.get("{{url('/getResource')}}/" + id, function (data) {
+            $("#resource_drop").html(data);
+        });
+    }
+    $(document).ready(function () {
+        getResource($('#training_drop').val());
+    });
+
+    $('#resource_drop').on('change focus', function () {
+        getTopic($(this).val());
+    });
+    function getTopic(id) {
+        $.get("{{url('/getTopic')}}/" + id, function (data) {
+            $("#topic").html(data);
+        });
+    }
+    $(document).ready(function () {
+        getTopic($('#resource_drop').val());
+    });
+</script>
+<script>
+    $('div.alert').not('.alert-important').delay(8000).slideUp(350);
+</script>
 @endsection

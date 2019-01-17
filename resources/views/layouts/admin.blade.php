@@ -19,6 +19,8 @@
 
         <link rel="stylesheet" href="/css/admin.css?v=1">
         <link rel="stylesheet" href="/css/bootstrap-select.min.css">
+        <link rel="stylesheet" href="/css/timeline.css">
+        <link rel="stylesheet" href="/css/fullcalendar.min.css">
 
         @yield('styles')
     </head>
@@ -31,6 +33,8 @@
             @include('admin.partials.header')
 
             @include('admin.partials.navigation')
+
+            @include('notify::notify')
 
             <div class="content-wrapper">
                 <section class="content">
@@ -56,22 +60,18 @@
             </footer>
         </div>
 
-        @include('notify::notify')
         @include('admin.partials.modals')
 
         <!--/js/admin.js?v=1-->
         <script type="text/javascript" charset="utf-8" src="/js/admin.js?v=1"></script>
         <script type="text/javascript" charset="utf-8" src="/js/bootstrap-select.min.js"></script>
-        <!--<script type="text/javascript" charset="utf-8" src="/js/bootstrap.min.js"></script>-->
-        <!--<script type="text/javascript" charset="utf-8" src="/js/jquery.min.js"></script>-->
-        <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
-        <script>
-            CKEDITOR.replace( 'article-ckeditor' );
-        </script>
-        @yield('scripts')
+        <script type="text/javascript" charset="utf-8" src="/js/Chart.bundle.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/js/utils.js"></script>
 
-        @if(config('app.env') != 'local')
-            @include('partials.analytics')
-        @endif
+        {{-- CALENDAR --}}
+        <script type="text/javascript" charset="utf-8" src="/js/fullcalendar.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/js/moment.min.js"></script>
+        
+        @yield('scripts')
     </body>
 </html>

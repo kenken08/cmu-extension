@@ -3,15 +3,15 @@
     <div id="banner-carousel" class="carousel slide banners" data-ride="carousel">
         <div class="carousel-inner" role="listbox">
             <div class="carousel-item active">
-                <img src="/storage/profile_images/banner/banner-1.jpg" class="banner-image"/>
+                <img src="/storage/profile_images/banner/Banner_1.jpg" class="banner-image"/>
             </div>
 
             <div class="carousel-item">
-                <img src="/storage/profile_images/banner/banner-1-tn.jpg" class="banner-image"/>
+                <img src="/storage/profile_images/banner/Banner_2.jpg" class="banner-image"/>
             </div>
                 
             <div class="carousel-item">
-                <img src="/storage/profile_images/banner/banner-3.jpg" class="banner-image"/>
+                <img src="/storage/profile_images/banner/Banner_3.jpg" class="banner-image"/>
             </div>
         </div>
         <a class="carousel-control-prev" href="#banner-carousel" role="button" data-slide="prev">

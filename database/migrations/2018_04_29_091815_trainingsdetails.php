@@ -19,6 +19,7 @@ class Trainingsdetails extends Migration
             $table->integer('user_id');
             $table->integer('attendee_id');
             $table->integer('training_id');
+            $table->integer('status');
             $table->timestamps();
         });
        

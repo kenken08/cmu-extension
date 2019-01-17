@@ -11,15 +11,15 @@
         $diff = $now->diff($et);
         $diff = $diff->days;
         $dateElapsed = $date2 - $diff;
-
-        $progress = (($date2 - $diff)/$date2) * 50;
+        
+        $progress = (($date2 - $diff)/$date2) * 60;
         $progress = (int)$progress;
 
         if($now <= $date1){
             return 0;
         }
         elseif($now >= $et){
-            return 50;
+            return 60;
         }
         else{
             return $progress;
@@ -30,6 +30,6 @@
         $dcon = new DateTime($dc);
         $tda = new DateTime($td);
 
-        echo "From:&nbsp;&nbsp;&nbsp;&nbsp;".$dcon->format('F j, Y') ."&nbsp;&nbsp;&nbsp;&nbsp;To:&nbsp;&nbsp;&nbsp;&nbsp;". $tda->format('F j, Y');
+        echo "From:&nbsp;&nbsp;&nbsp;".$dcon->format('F j, Y') ."&nbsp;&nbsp;&nbsp;To:&nbsp;&nbsp;&nbsp;". $tda->format('F j, Y');
     }
 ?>

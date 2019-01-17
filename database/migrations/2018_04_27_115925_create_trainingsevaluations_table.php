@@ -19,7 +19,7 @@ class CreateTrainingsevaluationsTable extends Migration
             $table->integer('eval_id');
             $table->integer('training_id');
             $table->date('dateoftraining');
-            $table->string('venue');
+            $table->integer('proj_id');
             $table->integer('aspect_id');
             $table->integer('aspect_eval');
             $table->timestamps();

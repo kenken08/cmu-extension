@@ -12,5 +12,4 @@
             </ul>
         @endif --}}
         <p>{{$res}}</p>
-
 @endsection

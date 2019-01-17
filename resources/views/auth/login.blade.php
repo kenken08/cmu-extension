@@ -13,10 +13,9 @@
                         @csrf
 
                         <div class="form-group row">
-                            <!--<label for="email" class="col-sm-4 col-form-label text-md-right">{{-- __('Email Address') --}}</label>-->
                             <div class="col-md-12">
                                 <div class="input-group">
-                                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="E-mail Address" required autofocus>
+                                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="E-mail Address" autofocus>
                                     <div class="input-group-append"><span class="input-group-text"><i class="fa fa-envelope"></i></span></div>
                                 </div>
                                 {!! form_error_message('email', $errors) !!}
@@ -24,10 +23,9 @@
                         </div>
 
                         <div class="form-group row">
-                            <!--<label for="password" class="col-md-4 col-form-label text-md-right">{{-- __('Password') --}}</label>-->
                             <div class="col-md-12">
                                 <div class="input-group">
-                                    <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="Password" name="password" required>
+                                    <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="Password" name="password">
                                     <div class="input-group-append"><span class="input-group-text"><i class="fa fa-lock"></i></span></div>
                                 </div>
                                 {!! form_error_message('password', $errors) !!}
@@ -37,8 +35,11 @@
                         <div class="form-group row">
                             <div class="col-md-6 offset-md-0">
                                 <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> {{ __('Remember Me') }}
+                                    <label class="form-check-label">
+                                        <input class="custom-checkbox" type="checkbox" value=""> Remember Me
+                                        <span class="form-check-sign">
+                                            <span class="check"></span>
+                                        </span>
                                     </label>
                                 </div>
                             </div>
@@ -72,5 +73,5 @@
             </div>
         </div>
     </div>
-</div>
+</div><br>
 @endsection

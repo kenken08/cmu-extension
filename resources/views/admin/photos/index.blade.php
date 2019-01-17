@@ -29,9 +29,9 @@
                         <tr>
                             <th class="text-center">Name</th>
                             <th class="text-center">Category</th>
-                            <th class="text-center">Image</th>
-                            <th class="text-center">Description</th>
-                            <th class="text-center">Action</th>
+                            <th style="width:200px" class="text-center">Image</th>
+                            <th style="width:300px" class="text-center">Description</th>
+                            <th style="width:100px" class="text-center">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -46,11 +46,16 @@
                                     @endforeach
                                     <td class="text-center">
                                         <a target="_blank" href="">
-                                            <img style="height: 50px; width: 50px" src="/storage/cover_images/{{$photo->image}}" title="{{ $photo->image }}">
+                                            <img style="height: 75px; width: 150px" src="/storage/cover_images/{{$photo->image}}" title="{{ $photo->image }}">
                                         </a>
                                     </td>
                                     <td>{{ $photo->description }}</td>
-                                    <td class="text-center"></td>
+                                    <td class="text-center">
+                                        <a onclick="document.getElementById('delete-gal').submit()" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Delete {{$photo->name}}">
+                                            <i class="fa fa-trash"></i> Delete
+                                        </a>
+                                        <form id="delete-gal" action="{{ route('delete-gal',$gid) }}" method="POST" enctype="multipart/form-data">@csrf</form>
+                                    </td>
                                 </tr>
                             @endif
                         @endforeach

@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             $table->boolean('admin')->default(0);
             $table->string('profile_image');
+            $table->integer('contactno');
         });
     }
 

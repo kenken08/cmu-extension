@@ -21,7 +21,7 @@ class CreateTrainingsTable extends Migration
             $table->date('tdate_conducted');
             $table->integer('noofdays');
             $table->integer('noofparticipants');
-            $table->integer('pdt');
+            $table->float('pdt');
             $table->integer('user_id');
             $table->timestamps();
         });

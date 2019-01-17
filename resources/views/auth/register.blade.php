@@ -76,21 +76,28 @@
                                 </div>
                             </div>
                         <div class="form-footer">
-                                <a href="javascript:window.history.back();" class="btn btn-labeled btn-default">
-                                    <span class="btn-label"><i class="fa fa-fw fa-chevron-left"></i></span>Back
-                                </a>
-                                <div class="pull-right">
-                                    <button class="btn btn-labeled btn-primary btn-submit">
-                                        <span class="btn-label"><i class="fa fa-fw fa-save"></i></span>{{__('Register')}}
-                                    </button>
-                                </div>           
+                            <div class="row">
+                                <div class="col-4">
+                                    <a class="btn btn-link btn-sm padding-left-0" href="{{ route('login') }}">I have an account!</a>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="pull-right">
+                                        <a href="javascript:window.history.back();" class="btn btn-labeled btn-default">
+                                            <span class="btn-label"><i class="fa fa-fw fa-chevron-left"></i></span>Back
+                                        </a>
+                                        <button class="btn btn-labeled btn-primary btn-submit">
+                                            <span class="btn-label"><i class="fa fa-fw fa-save"></i></span>{{__('Register')}}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>           
                         </div>
                     {!! Form::close() !!}
                 </div>
             </div>
         </div>
     </div>
-</div>
+</div><br>
 @endsection
 @section('scripts')
     @parent

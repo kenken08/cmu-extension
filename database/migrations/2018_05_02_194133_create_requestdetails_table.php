@@ -15,6 +15,11 @@ class CreateRequestdetailsTable extends Migration
     {
         Schema::create('requestdetails', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('requestid');
+            $table->integer('replied_id');
+            $table->string('message');
+            $table->date('datetime');
+            $table->integer('status');
             $table->timestamps();
         });
     }

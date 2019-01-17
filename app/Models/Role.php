@@ -35,7 +35,13 @@ class Role extends Model
     }
     public function user(){
         $user = DB::table('users')->where('admin','=','0')->value('admin');
-        if(Auth::user()->admin == $user){
+        if(Auth::user()->admin == $user ){
+            return $user;
+        }
+    }
+    public function confirm(){
+        $user = DB::table('users')->where('status','=','pending')->value('status');
+        if(Auth::user()->status == $user ){
             return $user;
         }
     }

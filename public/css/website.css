@@ -14994,6 +14994,9 @@ a.text-grey:focus {
 .bg-black-active {
     background-color: #000000 !important;
 }
+.bg-gween {
+  background-color: #006442 !important;
+}
 .bg-red-active,
 .modal-danger .modal-header,
 .modal-danger .modal-footer {
@@ -15297,7 +15300,7 @@ figcaption {
     padding: 0 15px;
     margin: 15px 5%;
     position: absolute;
-    bottom: -60px;
+    bottom: -230px;
     left: 0;
     background: rgba(255, 255, 255, 1);
     z-index: 2;
@@ -15699,7 +15702,7 @@ a[data-fancybox]:before {
 }
 /*---------------------------------Customize-------------------------------------------------------------------------------------*/
 #grad {
-  height: 80px;
+  height: auto;
   background: white; /* For browsers that do not support gradients */
   background: linear-gradient(to left, rgb(0, 84, 52),rgb(44, 208, 4),rgb(0, 89, 55)); /* Standard syntax (must be last) */
 }
@@ -15741,7 +15744,7 @@ a[data-fancybox]:before {
 
 
 .box-icon {
-  background-color: transparent;
+  /* background-color: transparent; */
   border: 1px solid #01bc8c;
   border-radius: 50%;
   display: table;
@@ -15752,7 +15755,7 @@ a[data-fancybox]:before {
 }
 
 .box-icon2 {
-  background-color: transparent;
+  /* background-color: transparent; */
   border: 1px solid #ffe347;
   border-radius: 50%;
   display: table;
@@ -15763,7 +15766,7 @@ a[data-fancybox]:before {
 }
 
 .box-icon3 {
-  background-color: transparent;
+  /* background-color: transparent; */
   border: 1px solid #e731ff;
   border-radius: 50%;
   display: table;
@@ -15788,4 +15791,570 @@ a[data-fancybox]:before {
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
   box-shadow:0px 2px 6px #888888;
+}
+.card2 {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  min-width: 0;
+  width:300px;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  /* border-radius: 0.25rem; */
+  /* box-shadow:0px 2px 6px #888888; */
+}
+@media (max-width: 1120px ) {
+  .card2{
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    min-width:930px;
+  }
+}
+@media (max-width: 970px) {
+  .card2{
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    min-width:700px;
+  }
+}
+@media (max-width: 890px) {
+  .card2{
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    min-width:590px;
+  }
+}
+@media (max-width: 870px) {
+  .card2{
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    min-width:560px;
+  }
+}
+@media(max-width: 800px){
+  .card2{
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    min-width:520px;
+  }
+}
+
+.c-css-toggle__button {
+  width: 60px;
+  height: 40px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+  overflow: hidden;
+  border: 1px solid #018264;
+}
+.c-css-toggle input[type=checkbox] {
+ display: none;
+}
+
+.c-css-toggle__button__knob, .c-css-toggle__button__knob__off, .c-css-toggle__button__knob__on {
+  box-sizing: border-box;
+}
+.c-css-toggle__button__knob {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 102px;
+  height: 40px;
+  font-weight: 700;
+  transition: all 200ms linear;
+}
+
+.c-css-toggle__button__knob__off, .c-css-toggle__button__knob__on {
+  width: 42px;
+  line-height: 20px;
+  padding: 10px;
+  color: #452c52;
+}
+
+.c-css-toggle__button__knob__pommel {
+  border: 1px solid #018264;
+  width: 18px;
+  margin-top: -1px;
+  margin-bottom: -1px;
+  background-color: #f47920;
+  
+}
+.c-css-toggle__button__knob__on {
+  background-color: #018264;
+  color: #fff;
+}
+.c-css-toggle__button__knob__off, .c-css-toggle__button__knob__on {
+  width: 42px;
+  line-height: 20px;
+  padding: 10px;
+}
+
+.c-css-toggle input[type=checkbox]:checked+.c-css-toggle__button .c-css-toggle__button__knob {
+  -webkit-transform: translateX(-42px);
+  -ms-transform: translateX(-42px);
+  transform: translateX(-42px);
+}
+
+/*--------------------------------------------------------------
+# Sections
+--------------------------------------------------------------*/
+/* Sections Header
+--------------------------------*/
+.section-header .section-title {
+  font-size: 32px;
+  color: #111;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.section-header .section-description {
+  text-align: center;
+  padding-bottom: 40px;
+  color: #999;
+}
+
+/* About Us Section
+--------------------------------*/
+#about {
+  background: #fff;
+  padding: 80px 0;
+}
+
+#about .about-container .background {
+  min-height: 300px;
+  background: url(../img/about-img.jpg) center top no-repeat;
+  margin-bottom: 10px;
+}
+
+#about .about-container .content {
+  background: #fff;
+}
+
+#about .about-container .title {
+  color: #333;
+  font-weight: 700;
+  font-size: 32px;
+}
+
+@media (max-width: 768px) {
+  #about .about-container .title {
+    padding-top: 15px;
+  }
+}
+
+#about .about-container p {
+  line-height: 26px;
+}
+
+#about .about-container p:last-child {
+  margin-bottom: 0;
+}
+
+#about .about-container .icon-box {
+  background: #fff;
+  background-size: cover;
+  padding: 0 0 30px 0;
+}
+
+#about .about-container .icon-box .icon {
+  float: left;
+  background: #fff;
+  padding: 16px;
+  border-radius: 50%;
+  border: 2px solid #2dc997;
+}
+
+#about .about-container .icon-box .icon i {
+  color: #2dc997;
+  font-size: 24px;
+}
+
+#about .about-container .icon-box .title {
+  margin-left: 80px;
+  font-weight: 500;
+  margin-bottom: 5px;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+#about .about-container .icon-box .title a {
+  color: #111;
+}
+
+#about .about-container .icon-box .description {
+  margin-left: 80px;
+  line-height: 24px;
+  font-size: 14px;
+}
+
+/* Facts Section
+--------------------------------*/
+#facts {
+  background: #f7f7f7;
+  padding: 80px 0 60px 0;
+}
+
+#facts .counters span {
+  font-size: 48px;
+  display: block;
+  color: #2dc997;
+}
+
+#facts .counters p {
+  padding: 0;
+  margin: 0 0 20px 0;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+}
+
+/* Services Section
+--------------------------------*/
+#services {
+  background: #fff;
+  background-size: cover;
+  padding: 80px 0 60px 0;
+}
+
+#services .box {
+  padding: 50px 20px;
+  margin-bottom: 50px;
+  text-align: center;
+  border: 1px solid #e6e6e6;
+  height: 200px;
+  position: relative;
+  background: #fafafa;
+}
+
+#services .icon {
+  position: absolute;
+  top: -36px;
+  left: calc(50% - 36px);
+  transition: 0.2s;
+  border-radius: 50%;
+  display: inline-block;
+  border: 6px solid #fff;
+}
+
+#services .icon a {
+  display: inline-block;
+  background: #2dc997;
+  border: 2px solid #2dc997;
+  padding: 16px;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+#services .icon i {
+  color: #fff;
+  font-size: 24px;
+}
+
+#services .box:hover .icon i {
+  color: #2dc997;
+}
+
+#services .box:hover .icon a {
+  color: #2dc997;
+  background: #fff;
+}
+
+#services .title {
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+#services .title a {
+  color: #111;
+}
+
+#services .description {
+  font-size: 14px;
+  line-height: 24px;
+}
+
+/* Call To Action Services Section
+--------------------------------*/
+
+/* Contact Section
+--------------------------------*/
+#contact1 {
+  background: #f7f7f7;
+  padding: 0px 0 40px 0;
+}
+
+#contact1 #google-map {
+  height: 300px;
+  margin-bottom: 20px;
+}
+
+#contact1 .info {
+  color: #333333;
+}
+
+#contact1 .info i {
+  font-size: 32px;
+  color: #2dc997;
+  float: left;
+}
+
+#contact1 .info p {
+  padding: 0 0 10px 50px;
+  margin-bottom: 20px;
+  line-height: 22px;
+  font-size: 14px;
+}
+
+#contact1 .info .email p {
+  padding-top: 5px;
+}
+
+#contact1 .social-links {
+  padding-bottom: 20px;
+}
+
+#contact1 .social-links a {
+  font-size: 18px;
+  display: inline-block;
+  background: #333;
+  color: #fff;
+  line-height: 1;
+  padding: 8px 0;
+  border-radius: 50%;
+  text-align: center;
+  width: 36px;
+  height: 36px;
+  transition: 0.3s;
+}
+
+#contact1 .social-links a:hover {
+  background: #2dc997;
+  color: #fff;
+}
+
+#contact1 .form #sendmessage {
+  color: #2dc997;
+  border: 1px solid #2dc997;
+  display: none;
+  text-align: center;
+  padding: 15px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+#contact1 .form #errormessage {
+  color: red;
+  display: none;
+  border: 1px solid red;
+  text-align: center;
+  padding: 15px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+#contact1 .form #sendmessage.show, #contact .form #errormessage.show, #contact .form .show {
+  display: block;
+}
+
+#contact1 .form .validation {
+  color: red;
+  display: none;
+  margin: 0 0 20px;
+  font-weight: 400;
+  font-size: 13px;
+}
+
+#contact1 .form input, #contact1 .form textarea {
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 14px;
+}
+
+#contact1 .form button[type="submit"] {
+  background: #2dc997;
+  border: 0;
+  padding: 10px 24px;
+  color: #fff;
+  transition: 0.4s;
+}
+
+#contact1 .form button[type="submit"]:hover {
+  background: #51d8ad;
+}
+
+#contact {
+  background: #f7f7f7;
+  padding: 80px 0 40px 0;
+}
+#about {
+  background: #f7f7f7;
+  padding: 0px 0 40px 0;
+}
+
+#contact #google-map {
+  height: 300px;
+  margin-bottom: 20px;
+}
+
+#contact .info {
+  color: #333333;
+}
+
+#contact .info i {
+  font-size: 32px;
+  color: #2dc997;
+  float: left;
+}
+
+#contact .info p {
+  padding: 0 0 10px 50px;
+  margin-bottom: 20px;
+  line-height: 22px;
+  font-size: 14px;
+}
+
+#contact .info .email p {
+  padding-top: 5px;
+}
+
+#contact .social-links {
+  padding-bottom: 20px;
+}
+
+#contact .social-links a {
+  font-size: 18px;
+  display: inline-block;
+  background: #333;
+  color: #fff;
+  line-height: 1;
+  padding: 8px 0;
+  border-radius: 50%;
+  text-align: center;
+  width: 36px;
+  height: 36px;
+  transition: 0.3s;
+}
+
+#contact .social-links a:hover {
+  background: #2dc997;
+  color: #fff;
+}
+
+#contact .form #sendmessage {
+  color: #2dc997;
+  border: 1px solid #2dc997;
+  display: none;
+  text-align: center;
+  padding: 15px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+#contact .form #errormessage {
+  color: red;
+  display: none;
+  border: 1px solid red;
+  text-align: center;
+  padding: 15px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+#contact .form #sendmessage.show, #contact .form #errormessage.show, #contact .form .show {
+  display: block;
+}
+
+#contact .form .validation {
+  color: red;
+  display: none;
+  margin: 0 0 20px;
+  font-weight: 400;
+  font-size: 13px;
+}
+
+#contact .form input, #contact .form textarea {
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 14px;
+}
+
+#contact .form button[type="submit"] {
+  background: #2dc997;
+  border: 0;
+  padding: 10px 24px;
+  color: #fff;
+  transition: 0.4s;
+}
+
+#contact .form button[type="submit"]:hover {
+  background: #51d8ad;
+}
+.image {
+  /* opacity: 1;
+  display: block; */
+  width:110px; height: 110px; 
+  /* margin-left:75px; */
+  /* transition: .5s ease;
+  backface-visibility: hidden; */
 }

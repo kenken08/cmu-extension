@@ -1,6 +1,11 @@
 @extends('layouts.admin')
 
 @section('content')
+<div class="row mt-5">
+    <div class="col-sm-12 text-right">
+        <i class="fa fw fa-home"> <span>Dashboard</span> / Users / <span>{{$title}}</span></i>
+    </div><hr>
+</div>
     <div class="row">
         <div class="col-xs-12">
             <div class="box box-primary box-solid">
@@ -10,31 +15,9 @@
                         <span>{{ isset($user->firstname)? 'Edit ' . $user->firstname.' '. $user->lastname. '' : 'Create a new User' }}</span>
                     </h3>
                 </div>
-
-                <div class="box-body no-padding">
-
-                    <div class="col-sm-12">
-                        <div class=" well-sm well-toolbar">
-                        <!--<form action="/home/users/edit/{{--$user->id--}}" accept-charset="UTF-8" method="POST">
-                                <input type="hidden" name="_token" value="{{-- csrf_token() --}}"/>
-                                <input type="hidden" name="email" value="{{-- ($errors->any()? old('email') : $user->email) --}}">
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <button type="submit" class="btn btn-small btn-primary btn-flat btn-submit pull-right">
-                                            <i class="fa fa-refresh"></i> Send Forgot Password
-                                            Instructions
-                                        </button>
-                                    </div>
-                                </div>
-                        </form>-->
-                    </div>
-                </div>
-                    <!--<form id="form-edit" method="POST" action="/home/users/edit/{{--(isset($user)? "/{$user->id}" : '')--}}" accept-charset="UTF-8" enctype="multipart/form-data">-->
                     {!! Form::open(['action' => ['UserController@update', $user->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
-                        {{Form::token()}}
-                        <!--<input name="_method" type="hidden" value="{{--isset($user)? 'PUT':'POST'--}}">-->
-                        {{form::hidden('_method', isset($user)? 'PUT' : 'POST')}}
+                    {{Form::token()}}
+                    {{form::hidden('_method', isset($user)? 'PUT' : 'POST')}}
                             <fieldset>
                                 <div class="row">
                                     <div class="col col-6">
@@ -71,15 +54,14 @@
                                             {!! form_error_message('email', $errors) !!}
                                         </section>
                                     </div>
-    
-                                    <div class="col col-6">
-                                        <div class="form-group {{ form_error_class('password', $errors) }}">
-                                            <label for="password">Password <small> (leave blank to keep it unchanged)</small></label>
+                                    <div class="col-md-6">
+                                        <div class="form-group {{ form_error_class('contactno', $errors) }}">
+                                            <label>Contact Number</label>
                                             <div class="input-group">
-                                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" value="" >
-                                                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                                <input type="number" class="form-control" id="contactno" name="contactno" placeholder="09xxxxxxxxx" value="{{ ($errors->any()? old('contactno') : user()->contactno) }}">
+                                                <span class="input-group-addon"><i class="fa fa-mobile"></i></span>
                                             </div>
-                                            {!! form_error_message('password', $errors) !!}
+                                            {!! form_error_message('contactno', $errors) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -95,16 +77,16 @@
                                             {!! form_error_message('born_at', $errors) !!}
                                         </div>
                                     </div>
-    
                                     <div class="col-md-6">
-                                        <div class="form-group {{ form_error_class('password_confirmation', $errors) }}">
-                                            <label>Confirm Password</label>
-                                            <div class="input-group">
-                                                <input type="password" class="form-control" id="id-password_confirmation" name="password_confirmation" placeholder="Password Confirm" value="{{ ($errors->any()? old('password_confirmation') : user()->password_confirmation) }}">
-                                                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                            </div>
-                                            {!! form_error_message('password_confirmation', $errors) !!}
-                                        </div>
+                                        <div class="form-group">
+                                            <label for="role">Role</label>
+                                            <select id="role" name="role" class="selectpicker form-control" data-show-subtext="true" data-live-search="true" onchange="">
+                                                <option value='{{$user->admin}}'>Choose Role</option>
+                                                <option value='1'>Admin</option>
+                                                <option value='2'>Units</option>
+                                            </select>
+                                            {!! form_error_message('training_id', $errors) !!}
+                                        </div>  
                                     </div>
                                 </div>
                                 <section class="form-group {{ form_error_class('photo', $errors) }}">
@@ -112,13 +94,12 @@
                                     <div class="input-group input-group-sm">
                                         <input id="photo-label" type="text" class="form-control" readonly placeholder="Browse for an image">
                                         <span class="input-group-btn">
-                                      <button type="button" class="btn btn-default" onclick="document.getElementById('profile_image').click();">Browse</button>
+                                        <button type="button" class="btn btn-default" onclick="document.getElementById('profile_image').click();">Browse</button>
                                     </span>
                                         <input id="profile_image" style="display: none" accept="{{ get_file_extensions('image') }}" type="file" name="profile_image" onchange="document.getElementById('photo-label').value = this.value">
                                     </div>
                                     {!! form_error_message('profile_image', $errors) !!}
                                 </section>
-    
                                 @if($user->profile_image)
                                     <section>
                                         <img src="/storage/profile_images/{{$user->profile_image}}" style="max-height: 300px;">
@@ -126,7 +107,6 @@
                                     </section>
                                 @endif
                             </fieldset>
-    
                             @include('admin.partials.form_footer')
                     {!! Form::close() !!}
                 </div>

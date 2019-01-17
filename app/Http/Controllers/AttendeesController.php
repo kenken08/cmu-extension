@@ -35,12 +35,15 @@ class AttendeesController extends Controller
      */
     public function index($pid,$tid)
     {
-        $title = "Attendees";
-        $project = Projects::findOrFail($pid);
-        $train = Trainings::findOrFail($tid);
-        $attendees = Attendees::all();
-        $details = DB::table('trainingdetails')->get();
-        return view('Units.Attendees.show',compact('title','project','train'))->with(['attendees'=> $attendees,'details'=>$details]);
+        $title = "Participants";
+        $project = Projects::find($pid);
+        $train = Trainings::find($tid);
+        // $attendees = Attendees::all();
+        $attendees = Attendees::join('trainingsdetails','trainingsdetails.attendee_id','=','attendees.id')
+                    ->where('attendees.id','!=','trainingsdetails.attendee_id')->where('trainingsdetails.training_id',$tid)->get();
+        $users = User::all();
+        $details = TrainingsDetails::all();
+        return view('Units.Attendees.show',compact('title','project','train'))->with(['users'=>$users,'attendees'=> $attendees,'details'=>$details]);
     }
 
     /**
@@ -50,7 +53,7 @@ class AttendeesController extends Controller
      */
     public function create()
     {
-        $title="Create Trainee";
+        $title="Add Participant";
         return view('Units.Attendees.create',compact('title'));
     }
 
@@ -63,16 +66,59 @@ class AttendeesController extends Controller
      */
     public function store(Request $request)
     {
-        if(!$request->input('project_id') ==  null){
-            $attendee = new TrainingsDetails;
-            $attendee->user_id = auth()->user()->id;
-            // $attendee->project_id = $request->input('project_id');
-            $attendee->training_id = $request->input('training_id');
-            $attendee->attendee_id = $request->input('attendee');
-            $attendee->save();
+        $attendees = $request->input('attendee');
+        $tid = $request->input('training_id');
 
-            $notif = notify()->success('Success', 'Attendee successfully added');
-            return redirect()->back();
+        if(!$request->input('project_id') ==  null){
+
+            $imp='';
+            for($j=0;$j<count($attendees);$j++){
+                $imp .= $attendees[$j].",";
+            }
+
+            $det = TrainingsDetails::where('training_id',$tid);
+            $ite = count($attendees);
+            $cut = explode(",", $imp,$ite);
+
+            for($i=0;$i<count($cut);$i++){
+                $det = TrainingsDetails::where('training_id',$tid)->where('attendee_id','=',$cut[$i])->value('id');
+                $f = TrainingsDetails::find($det);
+
+                // $imp = '';
+                // if($det == $f){
+                //     $imp = $det.',';
+                //     return $imp;
+                // }else{
+                //     $wala= '';
+                //     $wala = $det.',';
+                //     return $wala;
+                // }
+            
+                if($f == null){
+                    foreach($cut as $c){
+                        $attendee = new TrainingsDetails;
+                        $attendee->user_id = auth()->user()->id;
+                        $attendee->training_id = $request->input('training_id');
+                        $attendee->attendee_id = preg_replace('/[^0-9]/','',$c);
+                        $attendee->status = 1;
+                        $attendee->save();
+                    }
+
+                    notify()->success('Success', 'Attendee(s) successfully added');
+                    return redirect()->back();
+                }
+                elseif($f != null){
+                    $names='';
+                    foreach($cut as $c){
+                        $p = preg_replace('/[^0-9]/','',$c);
+                        $user = User::where('id',$p)->value('firstname');
+                        $parts = Attendees::where('id',$p)->value('fname');
+                        $names .= $parts.','.$user;
+                    }
+                    notify()->Error('Oops!', 'Participant(s) '.$names.' has already been added');
+                    return redirect()->back();
+                }
+            }
         }
         else{
             $attendee = new Attendees;
@@ -88,7 +134,6 @@ class AttendeesController extends Controller
             $attendee->occupation = $request->input('occupation');
             $attendee->address = $request->input('address');
             $attendee->cellno = $request->input('cellno');
-            // $attendee = implode('_', $attendee);
             $attendee->save();
 
             $notif = notify()->success('Success', 'Attendee successfully added');
@@ -148,7 +193,6 @@ class AttendeesController extends Controller
         $attendee->user_id = auth()->user()->id;
         $attendee->project_id = $request->input('project_id');
         $attendee->training_id = $request->input('training_id');
-        // $attendee = implode('_', $attendee);
         $attendee->att_id = $request->input('attendee');
         $attendee->save();
 

@@ -66,9 +66,11 @@ class UserController extends Controller
             $user->created_at = time();
             $user->profile_image = 'noimage.png';
             $user->admin = '0';
+            $user->status = "pending";
             $user->save();
 
-            notify()->success('Register', 'Registered Successfully');
+            // alert()->success('Thank you,','your account has been created, please check your inbox for further instructions.');
+            flash()->success('Registered Successfully');
             return redirect('/login');
     }
 
@@ -111,6 +113,7 @@ class UserController extends Controller
             'lastname' => 'required',
             'born_at' => 'required|date',
             'profile_image' => 'image|nullable|max:1999',
+            'contactno' => 'nullable|max:20',
             'password' => 'confirmed',
         ]);
         if($request->hasFile('profile_image')){            
@@ -135,9 +138,10 @@ class UserController extends Controller
                     $user->password = Hash::make(Input::get('password'));
                 }
                 $user->born_at = $request->input('born_at');
+                $user->admin = $request->input('role');
                 $user->save();
                 notify()->success('Success', 'Profile updated sucessfully and no file uploaded');
-                return redirect('/home/users')->with('title', $title);
+                return redirect()->back()->with('title', $title);
             }
             else{
                 $user->firstname = $request->input('firstname');
@@ -148,10 +152,10 @@ class UserController extends Controller
                 }
                 $user->profile_image = $fileNameToStore;
                 $user->born_at = $request->input('born_at');
+                $user->admin = $request->input('role');
                 $user->save();
-
                 notify()->success('Success', 'Profile updated sucessfully');
-                return redirect('/home/users')->with('title', $title);
+                return redirect()->back()->with('title', $title);
             }
     }
 
@@ -161,12 +165,24 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy()
     {
-        $user = User::find($id);
+        $user = User::find(Input::get('uid'));
+        if($user->profile_image !== 'noimage.png'){
+            Storage::delete('public/profile_images/'.$user->profile_image);
+        }
         $user->Delete();
 
         notify()->success('Success', 'User Deleted successfully');
         return redirect('/users');
+    }
+
+    public function confirmation($id){
+        $user = User::find($id);
+        $user->status = 'approved';
+        $user->save();
+
+        notify()->success('Success','User Registration Successfully Confirmed');
+        return redirect()->back();
     }
 }

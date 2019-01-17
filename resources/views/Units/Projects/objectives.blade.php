@@ -2,13 +2,18 @@
 
 @section('content')
 <div class="row">
+    <div class="col-sm-12 text-right">
+        <i class="fa fw fa-home"><span>Dashboard</span> / <span>Projects</span> / <span>{{$title}}</span></i>
+    </div><hr>
+</div>
+<div class="row">
     <div class="col-xs-12">
-        <div class="box box-success">
+        <div class="box box-primary box-solid">
             <div class="box-header ">
                 <h3 class="box-title">
                     <span><i class="fa fa-book"></i></span>
                     @if(isset($project->id))
-                        <span>Projects Objective of {{$project->project_name}}</span>
+                        <span>Objective of {{$project->project_name}}</span>
                     @endif
                     
                 </h3>
@@ -35,30 +40,33 @@
                             @php($i=1)
                                 @if($object->proj_id == $project->id)
                                     <tr>
-                                        <td class="text-uppercase hidden"><input type="text" name="id[]" value="{{ $object->id }}"></td>
-                                        <td class="text-uppercase">
+                                        <td class="text-uppercase hidden" style="vertical-align:middle;"><input type="text" name="id[]" value="{{ $object->id }}"></td>
+                                        <td class="text-uppercase" style="vertical-align:middle;">
                                                 <strong>{{ $object->objective }}</strong>
                                         </td>
-                                        <td class="text-uppercase text-center">
+                                        <td class="text-uppercase text-center" style="vertical-align:middle;">
                                             @if($object->status == "Pending")
-                                                <span class="label input-lg label-danger">{{ $object->status }}</span>
+                                                <span class="label input-lg label-warning">{{ $object->status }}</span>
                                             @else
                                                 <span class="label input-lg label-success">{{ $object->status }}</span>
                                             @endif    
                                         </td>
-                                        <td>
-                                            <div class="btn-toolbar">
-                                                <div class="row">
-                                                    <div class="form-group col-sm-12">
-                                                        <select class="form-control" name="editobj[]" id="editobj">
-                                                            <option class="hidden" value="{{$object->status}}"></option>
-                                                            <option value="Pending">Pending</option>
-                                                            <option value="Completed">Completed</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
+                                        @if($object->status != 'Completed')
+                                            <td>
+                                                <select class="form-control" name="editobj[]" id="editobj">
+                                                    <option class="hidden" value="{{$object->status}}"></option>
+                                                    <option value="Pending">Pending</option>
+                                                    <option value="Completed">Completed</option>
+                                                </select>
+                                            </td>
+                                        @else
+                                            <td class="text-center">
+                                                <select class="form-control" name="editobj[]" id="editobj">
+                                                    <option class="hidden" selected value="{{$object->status}}"></option>
+                                                    <option disabled>Completed</option>
+                                                </select>
+                                            </td>
+                                        @endif
                                     </tr>
                                 @endif
                             @php($i++)

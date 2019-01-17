@@ -11,12 +11,12 @@
         <table id="tbl-list" data-server="false" data-page-length="10" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
                 <tr>
-                    <th><i class="fa fa-fw fa-user text-muted"></i> Name</th>
-                    <th><i class="fa fa-fw fa-envelope text-muted"></i> Email</th>
+                    <th><i class="fa fa-fw fa-user text-muted"></i> Projects Name</th>
                 </tr>
             </thead>
             <tbody>
-                    
+                {{-- @foreach()
+                @endforeach --}}
             </tbody>
         </table>
     </div>

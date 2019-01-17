@@ -10,14 +10,17 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         @include ('partials.favicons')
-
-        <title>{{ isset($title) ? $title : config('app.name') }}</title>
+        
+        <title>{{ isset($title) ? $title ." | ". config('app.name') : config('app.name') }}</title>
 
         @if(config('app.env') != 'local')
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
         @endif
-
+        
+        {{-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> --}}
         <link rel="stylesheet" href="/css/website.css">
+        {{-- <link rel="stylesheet" href="/css/timelinee.css"> --}}
+        <link rel="stylesheet" href="/css/timeline.css">
 
         @yield('styles')
     </head>
@@ -32,21 +35,28 @@
         @if(Request::url() == route('main') )
             @include('website.partials.banner')
         @endif
+        <div class="container">
+            @include('flash::message')
+        </div>
 
-        <div class="container mb-5">@yield('content')</div>
-
+        <div class="bg-light">@yield('content')</div>
+        
         @include('website.partials.footer')
 
         @include('website.partials.popups')
-
-        @include('notify::notify')
         
         {{-- back to top --}}
-        <a href="#top" class="back-to-top jumper btn btn-success">
+        <a href="#top" class="back-to-top jumper btn bg-gween" style="color:white">
             <i class="fa fa-angle-up"></i>
         </a>
 
         <script type="text/javascript" charset="utf-8" src="/js/website.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/js/wow/wow.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/js/wow/wow.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/js/timelinee.js"></script>
+        <script>
+            $('div.alert').not('.alert-important').delay(5000).slideUp(350);
+        </script>
         @yield('scripts')
     </body>
 </html>
