@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 use App\User as User;
+use Faker\Generator as Faker;
 
 class UsersTableSeeder extends Seeder
 {
@@ -13,14 +14,6 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        for($i=0;$i<6;$i++){
-            DB::table('users')->insert([
-                'firstname' => str_random(10),
-                'lastname' => str_random(10),
-                'email' => str_random(10).'@gmail.com',
-                'password' => bcrypt('password'),
-                'profile_image' => 'noimage.png',
-            ]);
-        }
+        factory(App\User::class, 20)->create();
     }
 }

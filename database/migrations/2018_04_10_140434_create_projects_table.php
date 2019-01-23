@@ -20,8 +20,8 @@ class CreateProjectsTable extends Migration
             $table->date('to_date');
             $table->date('date_conducted');
             $table->integer('user_id');
-            $table->varchar('description');
-            $table->varchar('stat');
+            $table->longtext('description');
+            $table->longtext('stat');
             $table->timestamps();
         });
     }
