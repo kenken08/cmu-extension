@@ -17,9 +17,12 @@ $factory->define(App\User::class, function (Faker $faker) {
     return [
         'firstname' => $faker->firstname,
         'lastname' => $faker->lastname,
+        'contactno' =>mt_rand(11, 199),
         'email' => $faker->unique()->safeEmail,
+        'born_at' => $faker->date($format = 'Y-m-d', $max = 'now'),
         'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
         'remember_token' => str_random(10),
-        'profile_image' => 'noimage.png'
+        'profile_image' => 'noimage.png',
+        'status' => 'active',
     ];
 });
